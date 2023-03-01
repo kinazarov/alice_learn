@@ -7,8 +7,8 @@ const EXERSISE_COUNT = EXERSISE_ADD_COUNT + EXERSISE_SUBTRACT_COUNT;
 const EXERSISES_ON_PAGE = 28;
 const EXERSISES_IN_COLUMN = 7;
 
-const PROBABILITY_THOUSAND = 0.18;
-const PROBABILITY_SUMPLE_SUBTRACT = 0.1;
+const PROBABILITY_THOUSAND = 0.1;
+const PROBABILITY_SIMPLE_SUBTRACT = 0.02;
 const PROBABILITY_SIMPLE_ADD = 0.08;
 
 const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -20,7 +20,8 @@ function choose(choices) {
 
 
 function randomLimited(startIndex = 0, endIndex = 10) {
-    return choose(digits.slice(startIndex, endIndex + 1));
+    let slice = digits.slice(startIndex, endIndex + 1);
+    return choose(slice);
 }
 
 function randomNumber_1000(shift = 1) {
@@ -84,15 +85,18 @@ function get_exercise_block(){
                 let digit = 0;
                 let chunk = temp_number % divider;
                 temp_number = Math.floor(temp_number / divider);
-                if (Math.random() <= PROBABILITY_SUMPLE_SUBTRACT){
+                if (Math.random() <= PROBABILITY_SIMPLE_SUBTRACT){
                     if(chunk == 0){
                         digit = 0;
                     } else {
                         digit = randomLimited(0, chunk);
                     }
                 } else {
-                    let limit = chunk == 0 ? 10 : chunk;
-                    digit = randomLimited(0, limit);
+                    if(chunk == 0) {
+                        digit = randomLimited(0, 10);
+                    } else {
+                        digit = randomLimited(chunk);
+                    }
                 }
 
                 second_number = second_number + digit * Math.floor(Math.pow(divider, iteration));
