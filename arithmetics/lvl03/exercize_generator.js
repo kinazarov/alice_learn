@@ -4,7 +4,8 @@ const EXERSISE_ADD_COUNT = 2;
 const EXERSISE_SUBTRACT_COUNT = 4;
 const EXERSISE_COUNT = EXERSISE_ADD_COUNT + EXERSISE_SUBTRACT_COUNT;
 
-const EXERSISES_ON_PAGE = 24;
+const EXERSISES_ON_PAGE = 28;
+const EXERSISES_IN_COLUMN = 7;
 
 const PROBABILITY_THOUSAND = 0.18;
 const PROBABILITY_SUMPLE_SUBTRACT = 0.1;
@@ -130,7 +131,10 @@ for(let exercise_block_index = 0; exercise_block_index < EXERSISES_ON_PAGE; exer
         let exercise_string = (exersize_block  && exersize_block[exercise_index] && exersize_block[exercise_index].representation) || '';
         block = block + `${exercise_index + 1}. ${exercise_string}\n`;
     }
-    block = block + '\n\n';
+    block = block + '\n';
+    if((exercise_block_index + 1) % EXERSISES_IN_COLUMN == 0){
+        block = block + '\n\n';
+    }
 }
 
 clipboardy.writeSync(block);
