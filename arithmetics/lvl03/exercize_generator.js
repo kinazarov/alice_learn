@@ -61,7 +61,7 @@ function get_exercise_block(){
 
         parts.push(
             {
-                representation: `${first_number} + ${second_number}`
+                representation: `+${first_number}\n${second_number}\n`
             }
         );
 
@@ -116,7 +116,7 @@ function get_exercise_block(){
 
         parts.push(
             {
-                representation: `${first_number} - ${second_number}`
+                representation: `-${first_number}\n${second_number}\n`
             }
         );
 
@@ -133,12 +133,12 @@ for(let exercise_block_index = 0; exercise_block_index < EXERSISES_ON_PAGE; exer
     let exersize_block = get_exercise_block();
     for(let exercise_index = 0; exercise_index < EXERSISE_COUNT; exercise_index++){
         let exercise_string = (exersize_block  && exersize_block[exercise_index] && exersize_block[exercise_index].representation) || '';
-        block = block + `${exercise_index + 1}. ${exercise_string}\n`;
+        block = block + `${exercise_index + 1}.\t${exercise_string}\n`;
     }
     block = block + '\n';
-    if((exercise_block_index + 1) % EXERSISES_IN_COLUMN == 0){
-        block = block + '\n\n';
-    }
+    // if((exercise_block_index + 1) % EXERSISES_IN_COLUMN == 0){
+    //     block = block + '\n\n';
+    // }
 }
 
 clipboardy.writeSync(block);
